@@ -1,5 +1,19 @@
 #include "pushswap.h"
 
+void	exec_error(t_stack *a, t_stack *b)
+{
+	del_stack(a);
+	del_stack(b);
+	error();
+}
+
+void	error()
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+
 int	chk_duplicates(int size, char **argv)
 {
 	int	i;
