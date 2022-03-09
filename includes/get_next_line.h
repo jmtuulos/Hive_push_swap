@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pushswap.h                                      :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/03/08 14:56:22 by jheiskan         ###   ########.fr       */
+/*   Created: 2021/12/07 21:47:28 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/03/09 12:49:14 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FT_PUSHSWAP_H
-# define FT_PUSHSWAP_H
-
-# define MAX_NUMBER 2147483647
-# define MIN_NUMBER -2147483648
-
-
-long long int	ft_atoi_long(const char *str);
-
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
+# define BUFF_SIZE 100
+# define MAX_FD 12228
+
+int	get_next_line(const int fd, char **line);
 
 #endif
