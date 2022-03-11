@@ -3,15 +3,17 @@
 void	exec_rot(t_stack **stack)
 {
 	t_stack	*curr;
-
+	t_stack	*tmp;
 
 	if ((*stack)->next == NULL)
 		return ;
 	curr = *stack;
-	while (curr)
+	tmp = (*stack)->next;
+	while (curr->next)
 		curr = curr->next;
 	curr->next = *stack;
 	(*stack)->next = NULL;
+	*stack = tmp;
 }
 
 void	exec_rrot(t_stack **stack)
@@ -22,7 +24,7 @@ void	exec_rrot(t_stack **stack)
 	if ((*stack)->next == NULL)
 		return ;
 	curr = *stack;
-	while (curr)
+	while (curr->next)
 	{
 		prev = curr;
 		curr = curr->next;
@@ -32,44 +34,26 @@ void	exec_rrot(t_stack **stack)
 	prev->next = NULL;
 }
 
-void	exec_push(t_stack **first, t_stack **second)
+void	exec_push(t_stack **from, t_stack **dest)
 {
-	t_stack	*f_tmp;
-	t_stack	*s_tmp;
-	t_stack	*prev;
+	t_stack	*tmp;
 
-	if (!(*first))
+	if (!(*from))
 		return ;
-	f_tmp = (*first);
-	s_tmp = (*second);
-	while (f_tmp)
-	{
-		prev = f_tmp;
-		f_tmp = f_tmp->next;
-	}
-	while (s_tmp)
-		s_tmp = s_tmp->next;
-	s_tmp->next = f_tmp;
-	prev->next = NULL;
-
+	add_to_start(dest, (*from)->value);
+	tmp = *from;
+	*from = (*from)->next;
+	free(tmp);
 }
 
 void	exec_swap(t_stack **stack)
 {
-	t_stack	*prev;
-	t_stack *curr;
 	int		tmp;
 
 	if ((*stack)->next == NULL)
 		return ;
-	curr = *stack;
-	while (curr)
-	{
-		prev = curr;
-		curr = curr->next;
-	}
-	tmp = curr->value;
-	curr->value = prev->value;
-	prev->value = tmp;
+	tmp = (*stack)->value;
+	(*stack)->value = (*stack)->next->value;
+	(*stack)->next->value = tmp;
 }
 

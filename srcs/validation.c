@@ -1,9 +1,9 @@
 #include "pushswap.h"
 
-void	exec_error(t_stack *a, t_stack *b)
+void	exec_error(t_stack **a, t_stack **b)
 {
-	del_stack(a);
-	del_stack(b);
+	del_stack(*a);
+	del_stack(*b);
 	error();
 }
 
@@ -51,7 +51,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 		number = ft_atoi_long(argv[size]);
 		if (number > MAX_NUMBER || number < MIN_NUMBER)
 			return (0);
-		*a = add_to_start(a, number);
+		add_to_start(a, number);
 		size--;
 	}
 	return (1);
@@ -60,7 +60,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 void	validate_input(t_stack **a, int size, char **argv)
 {
 	size -= 1;
-
+	*a = new_node((char)0);
 	if (!create_stack(a, size, argv) || !chk_duplicates(size, argv))
 	{
 		del_stack(*a);

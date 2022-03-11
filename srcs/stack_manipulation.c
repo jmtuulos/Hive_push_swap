@@ -25,32 +25,29 @@ t_stack	*new_node(int value)
 	return (new);
 }
 
-t_stack	*add_to_start(t_stack **a, int value)
+void	add_to_start(t_stack **a, int value)
 {
 	t_stack	*tmp;
 	if ((*a)->value == (char)0)
-	{
-		(*a)->value = value;
-		return (*a);
-	}
+		*a = new_node(value);
 	else
 	{
 		tmp = new_node(value);
 		tmp->next = *a;
 		*a = tmp;
-		return (tmp);
 	}
+
 }
 
-void	add_to_end(t_stack *a, int value)
+void	add_to_end(t_stack **a, int value)
 {
 	t_stack	*tmp;
 
-	if (a->value == (char)0)
-		a->value = value;
+	if ((*a)->value == (char)0)
+		*a = new_node(value);
 	else
 	{
-		tmp = a;
+		tmp = *a;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp->next = new_node(value);

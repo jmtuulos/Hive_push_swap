@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/03/09 12:51:04 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/03/10 15:30:03 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =	checker.c\
 		ft_atoi_long.c\
 		validation.c\
 		stack_manipulation.c\
+		stack_shuffle.c\
 		get_next_line.c
 
 OBJ_NAME = $(SRCS:.c=.o)

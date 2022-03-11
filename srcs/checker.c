@@ -1,96 +1,101 @@
 #include "pushswap.h"
 
+void	wrong_answer()
+{
+	write(1, "KO\n", 3);
+	exit(0);
+}
+
 void	stack_sorted(t_stack *a, t_stack *b)
 {
 	int	nb;
-
-
-	nb = a->value
-	if (b || b->value != (char)0)
+	if (b)
 	{
-		while(a)
+		if (!(b->value == (char)0))
+			wrong_answer();
+	}
+	while(a->next)
+	{
+		nb = a->value;
+		a = a->next;
+		if(nb > a->value)
 		{
-			a = a->next;
-			if(!(nb > a->value))// continue here
-
+			write(1, "KO\n", 3);
+			exit(0);
+		}
 	}
-
-
-
-
-
-	{
-		write(1, "KO\n", 3);
-		exit(0);
-	}
+	write(1, "OK\n", 3);
+	exit(0);
 }
 
 void	chk_rot(t_stack **a, t_stack **b, char *command)
 {
-	if (!ft_strcmp("ra\n", command))
+	if (!ft_strcmp("ra", command))
 		exec_rot(a);
-	if else (!ft_strcmp("rb\n", command))
+	else if (!ft_strcmp("rb", command))
 		exec_rot(b);
-	if else (!ft_strcmp("rr\n", command))
+	else if (!ft_strcmp("rr", command))
 	{
 		exec_rot(b);
 		exec_rot(a);
 	}
-	if else (!ft_strcmp("rra\n", command))
+	else if (!ft_strcmp("rra", command))
 		exec_rrot(a);
-	if else (!ft_strcmp("rrb\n", command))
+	else if (!ft_strcmp("rrb", command))
 		exec_rrot(b);
-	if else (!ft_strcmp("rrr\n", command))
+	else if (!ft_strcmp("rrr", command))
 	{
 		exec_rrot(b);
 		exec_rrot(a);
 	}
 	else
-		exec_error();
+		exec_error(a, b);
 }
 
 void	chk_swap(t_stack **a, t_stack **b, char *command)
 {
-	if (!ft_strcmp("sa\n", command))
+	if (!ft_strcmp("sa", command))
 		exec_swap(a);
-	if else (!ft_strcmp("sb\n", command))
+	else if (!ft_strcmp("sb", command))
 		exec_swap(b);
-	if else (!ft_strcmp("ss\n", command))
+	else if (!ft_strcmp("ss", command))
 	{
-		exec_swap(a, b)
-		exec_swap(a, b);
+		exec_swap(a);
+		exec_swap(b);
 	}
 	else
-		exec_error();
+		exec_error(a, b);
 }
 
 void	stack_shuffle(t_stack **a, t_stack **b, char *command)
 {
 	if (*command == 's')
 		chk_swap(a, b, command);
-	if else (*command == 'r')
+	else if(*command == 'r')
 		chk_rot(a, b, command);
-	if else (!ft_strcmp("pa\n", command))
-		exec_push(a, b);
-	if else (!ft_strcmp("pb\n", command))
+	else if (!ft_strcmp("pa", command))
 		exec_push(b, a);
+	else if (!ft_strcmp("pb", command))
+		exec_push(a, b);
 	else
-		exec_error(a, b);
+		exec_error(b, a);
 }
 
 int	main(int argc, char **argv)
 {
-	char	**line;
+	char	*line;
 	t_stack	*a;
 	t_stack	*b;
 
 	if (argc < 2)
 		return (0);
-	a = new_node((char)0);
  	validate_input(&a, argc, argv);
-	b = new_node((char)0);
 	while (get_next_line(0, &line) > 0)
-		stack_shuffle(&a, &b, *line); // validation should exit() and free stacks if fails
+	{
+		if (!ft_strcmp(line, "done"))
+			break ;
+		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
+	}
 	stack_sorted(a,b); // checking if a is sorted and b is empty
 	return (0);
 }
