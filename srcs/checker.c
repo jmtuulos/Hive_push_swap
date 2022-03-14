@@ -91,11 +91,7 @@ int	main(int argc, char **argv)
 		return (0);
  	validate_input(&a, argc, argv);
 	while (get_next_line(0, &line) > 0)
-	{
-		if (!ft_strcmp(line, "done"))
-			break ;
 		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
-	}
 	stack_sorted(a,b); // checking if a is sorted and b is empty
 	return (0);
 }
