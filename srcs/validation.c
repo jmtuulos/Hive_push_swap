@@ -35,14 +35,14 @@ int	create_stack(t_stack **a, int size, char **argv)
 	long int	number;
 	int			i;
 
-	while (size > 0)
+	while (size >= 0)
 	{
 		i = 0;
 		if (argv[size][i] == '-')
 			i++;
-		if (!argv[size][i]) // check against "-" string
+		if (argv[size][i] == '\0') // check against "-" string
 			return(0);
-		while (argv[size][i])
+		while (argv[size][i] != '\0')
 		{
 			if (!ft_isdigit(argv[size][i]) || i > 10)
 				return (0);
@@ -59,8 +59,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 
 void	validate_input(t_stack **a, int size, char **argv)
 {
-	size -= 1;
-	*a = new_node((char)0);
+	*a = 0;
 	if (!create_stack(a, size, argv) || !chk_duplicates(size, argv))
 	{
 		del_stack(*a);

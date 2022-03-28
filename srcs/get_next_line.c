@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 22:36:26 by jheiskan          #+#    #+#             */
-/*   Updated: 2021/12/13 16:08:39 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:33:36 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static char	*put_line(char **str)
 {
-	size_t	i;
 	char	*tmp;
 	char	*lc_ptr;
 
-	i = 0;
 	tmp = *str;
 	lc_ptr = ft_strchr(tmp, '\n');
 	if (lc_ptr)

@@ -28,8 +28,11 @@ t_stack	*new_node(int value)
 void	add_to_start(t_stack **a, int value)
 {
 	t_stack	*tmp;
-	if ((*a)->value == (char)0)
-		(*a)->value = value;
+
+	if (!a || !*a)
+		(*a) = new_node(value);
+	// else if ((*a)->value == 0)
+	// 	(*a)->value = value;
 	else
 	{
 		tmp = new_node(value);
@@ -43,8 +46,10 @@ void	add_to_end(t_stack **a, int value)
 {
 	t_stack	*tmp;
 
-	if ((*a)->value == (char)0)
-		(*a)->value = value;
+	if (!a || !*a)
+		(*a) = new_node(value);
+	// else if((*a)->value == (char)0)
+	// 	(*a)->value = value;
 	else
 	{
 		tmp = *a;

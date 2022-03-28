@@ -1,4 +1,5 @@
 #include "pushswap.h"
+#include <stdio.h>
 
 void	wrong_answer()
 {
@@ -86,10 +87,20 @@ int	main(int argc, char **argv)
 	char	*line;
 	t_stack	*a;
 	t_stack	*b;
+	char	**input;
 
+	input = argv;
+	b = 0;
 	if (argc < 2)
 		return (0);
- 	validate_input(&a, argc, argv);
+	if (argc == 2)
+	{
+		input = ft_strsplit(argv[1], ' ');
+		argc = count_cells(input);
+		validate_input(&a, argc - 1, input);
+	}
+	else
+		validate_input(&a, argc - 2, &argv[1]);
 	while (get_next_line(0, &line) > 0)
 		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
 	stack_sorted(a,b); // checking if a is sorted and b is empty
