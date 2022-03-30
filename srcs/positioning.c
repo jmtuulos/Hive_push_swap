@@ -22,8 +22,8 @@ int	location_in_reverse_sorted(t_stack *stack, int value)
 	i = 0;
 	while(stack)
 	{
-		if (stack->value < value)
-			return (i);
+		if (stack->value > value && stack->next && stack->next->value < value)
+			return (i + 1);
 		i++;
 		stack = stack->next;
 	}

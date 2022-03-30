@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 def main():
-    outfile = open("100_randoms", 'r')
+    outfile = open("500_randoms", 'r')
     str1 = outfile.readlines()
     outfile.close()
     outfile = open(1, 'w')
