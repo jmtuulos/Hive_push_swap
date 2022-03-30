@@ -1,4 +1,26 @@
 #include "pushswap.h"
+#include "stdio.h" //testing
+
+void	rotate_highest_to_top_b(t_stack **stack, char **solution)
+{
+	int	highest;
+	int	stack_size;
+
+	stack_size = calc_stack_size(*stack);
+	highest = find_highest(*stack);
+	if (highest < stack_size / 2)
+	{
+		while (highest--)
+			rb(stack, solution);
+	}
+	else
+	{
+		highest = stack_size - highest;
+		while (highest--)
+			rrb(stack, solution);
+	}
+
+}
 
 char	*push_from_top_b(t_stack **b, t_stack **a, int index)
 {
@@ -9,6 +31,7 @@ char	*push_from_top_b(t_stack **b, t_stack **a, int index)
 	if (index == 0)
 	{
 		pb(a, b, &ret);
+		rotate_highest_to_top_b(b, &ret);
 		return (ret);
 	}
 	i = index;
@@ -16,8 +39,7 @@ char	*push_from_top_b(t_stack **b, t_stack **a, int index)
 		rb(b, &ret);
 	pb(a, b, &ret);
 	sb(b, &ret);
-	while (++i < index)
-		rrb(b, &ret);
+	rotate_highest_to_top_b(b, &ret);
 	return (ret);
 }
 
@@ -31,9 +53,7 @@ char	*push_from_bottom_b(t_stack **b, t_stack **a, int index, int stack_size)
 	while (stack_size > i++)
 		rrb(b, &ret);
 	pb(a,b, &ret);
-	while (stack_size > index++)
-		rb(b, &ret);
-	rb(b, &ret);
+	rotate_highest_to_top_b(b, &ret);
 	return (ret);
 }
 
@@ -74,6 +94,17 @@ int	max_of_stack(t_stack *a, int stack_size)
 	return (max_of_stack);
 }
 
+int	choose_index(t_stack *stack, int *indices)
+{
+	int	stack_size;
+
+	stack_size = calc_stack_size(stack);
+	if (indices[0] < stack_size - indices[1])
+		return (indices[0]);
+	else
+		return (indices[1]);
+}
+
 int	*find_ends_in_range(t_stack *stack, int *top_bottom, int max_of_range)
 {
 	t_stack	*tmp;
@@ -104,31 +135,100 @@ int	*find_ends_in_range(t_stack *stack, int *top_bottom, int max_of_range)
 	return (top_bottom);
 }
 
-void	rotate_index_to_top(t_stack **stack, char **solution, int index, int stack_size)
+int	*choice_rr_rrr(t_stack *a, t_stack *b, int *indices)
 {
-	int	i;
+	int	i_a;
+	int	i_b;
+	int	mv_rrr;
+	int mv_rr;
+	int	*rr_rrr;
 
-	i = index;
-	while (i--)
+	rr_rrr = (int *)malloc(sizeof(int) * 2);
+	rr_rrr[0] = 0;
+	rr_rrr[1] = 0;
+	i_a = choose_index(a, indices);
+	i_b = location_in_reverse_sorted(b, value_in_index(a, i_a));
+	if (i_b < i_a)
 	{
-		if (stack_size / 2 >= index)
-			ra(stack, solution);
+		mv_rr = i_b;
+		mv_rrr = calc_stack_size(a) - i_a;
+	}
+	else
+	{
+		mv_rr = i_a;
+		mv_rrr = calc_stack_size(b) - i_b;
+	}
+	if (mv_rr < mv_rrr)
+		rr_rrr[0] = mv_rr;
+	else
+		rr_rrr[1] = mv_rrr; // total moves (rrr + rra)
+	return (rr_rrr);
+}
+
+int	nb_of_rotations(t_stack *a, t_stack *b, int rot_a, int rot_b)
+{
+	if (rot_a > calc_stack_size(a) - rot_a)
+		rot_a = calc_stack_size(a) - rot_a;
+	if (rot_b > calc_stack_size(b) - rot_b)
+		rot_b = calc_stack_size(b) - rot_b;
+	return (rot_a + rot_b);
+
+}
+
+void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int *indices)
+{
+	int	*rr_rrr;
+	int	rot_a;
+	int	rot_b;
+	int	ra_rra;
+	int	index;
+
+	rr_rrr = choice_rr_rrr(*a, *b, indices); 	// amount of moves combined
+	rot_a = choose_index(*a, indices); 			// The index that needs to be on top
+	rot_b = location_in_reverse_sorted(*b, value_in_index(*a, rot_a));
+	// if ((nb_of_rotations(*a, *b, rot_a, rot_b) > rr_rrr[0] && rr_rrr[0] > 0) || (rr_rrr[1] > 0 && nb_of_rotations(*a, *b, rot_a, rot_b) > rr_rrr[1]))
+	// {
+	// 	if (rot_a > calc_stack_size(*a) - rot_a)
+	// 		rot_a = calc_stack_size(*a) - rot_a;
+	// 	if (rot_b > calc_stack_size(*b) - rot_b)
+	// 		rot_b = calc_stack_size(*b) - rot_b;
+	// 	while (rot_b > 0 && rot_a > 0)
+	// 	{
+	// 		if (rr_rrr[0]-- > 0)
+	// 			rr(a, b, solution);
+	// 		else if (rr_rrr[1]-- > 0)
+	// 			rrr(a, b, solution);
+	// 		rot_a--;
+	// 		rot_b--;
+	// 	}
+	// }
+	ra_rra = 0;
+	if (rot_a > calc_stack_size(*a) - rot_a)
+	{
+		rot_a = calc_stack_size(*a) - rot_a;
+		ra_rra = 1;
+	}
+	while (rot_a--)
+	{
+		if (ra_rra)
+			rra(a, solution);
 		else
-			rra(stack, solution);
+			ra(a, solution);
 	}
 }
 
-void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution)
+void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution, int *top_bottom)
 {
-	int	index;
+	int	dest_index;
 	int	stack_size;
 
+	rotate_index_to_top(a, b, solution, top_bottom);
 	stack_size = calc_stack_size(*b);
-	index = location_in_reverse_sorted(*b, (*a)->value);
-	if (stack_size / 2 >= index)
-		*solution = ft_strjoin(*solution, push_from_top_b(b, a, index));
+	dest_index = location_in_reverse_sorted(*b, (*a)->value);
+	if (stack_size / 2 >= dest_index)
+		*solution = ft_strjoin(*solution, push_from_top_b(b, a, dest_index));
 	else
-		*solution = ft_strjoin(*solution, push_from_bottom_b(b, a, index, stack_size));
+		*solution = ft_strjoin(*solution, push_from_bottom_b(b, a, dest_index, stack_size));
 }
 
 void	move_next_in_range(t_stack **a, t_stack **b, char **solution, int max_of_range)
@@ -139,11 +239,7 @@ void	move_next_in_range(t_stack **a, t_stack **b, char **solution, int max_of_ra
 
 	stack_size = calc_stack_size(*a);
 	top_bottom = find_ends_in_range(*a, top_bottom, max_of_range);
-	if (top_bottom[0] < stack_size - top_bottom[1])
-		rotate_index_to_top(a, solution, top_bottom[0], stack_size);
-	else
-		rotate_index_to_top(a, solution, top_bottom[1], stack_size);
-	push_to_reverse_sorted(b, a, solution);
+	push_to_reverse_sorted(b, a, solution, top_bottom);
 }
 
 char	*solve_6_to_100(t_stack **a, t_stack **b, int stack_size)

@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/03/28 14:47:06 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/03/29 23:19:07 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define MAX_NUMBER 2147483647
 # define MIN_NUMBER -2147483648
-# define STACK_SZ_6_TO_100 20
+# define STACK_SZ_6_TO_100 30
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -28,7 +28,11 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+int				find_highest(t_stack *stack);
+int				is_stack_reverse_sorted(t_stack *stack);
+void			rr(t_stack **a, t_stack **b, char **solution);
 int				count_cells(char **array);
+int				value_in_index(t_stack *stack, int index);
 char			*push_from_bottom(t_stack **a, t_stack **b, int index, int stack_size);
 char			*push_from_top(t_stack **a, t_stack **b, int index);
 int				location_in_reverse_sorted(t_stack *stack, int value);

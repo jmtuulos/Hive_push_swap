@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/03/24 17:01:08 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/03/29 10:54:10 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_SWP =	solve_stack.c\
 			validation.c\
 			ft_atoi_long.c\
 			stack_manipulation.c\
+			calculations.c\
 			stack_shuffle.c\
 
 OBJ_NAME_CHK = $(SRCS_CHK:.c=.o)

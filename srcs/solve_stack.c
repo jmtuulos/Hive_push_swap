@@ -11,14 +11,25 @@ int	is_stack_sorted(t_stack *stack)
 	return (1);
 }
 
+int	is_stack_reverse_sorted(t_stack *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->value <= stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 int	calc_stack_size(t_stack *stack)
 {
 	int	stack_size;
 
 	if (!stack)
 		return (0);
-	stack_size = 1;
-	while (stack->next)
+	stack_size = 0;
+	while (stack)
 	{
 		stack_size++;
 		stack = stack->next;

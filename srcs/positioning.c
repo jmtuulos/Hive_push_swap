@@ -29,3 +29,25 @@ int	location_in_reverse_sorted(t_stack *stack, int value)
 	}
 	return (i);
 }
+
+int	find_highest(t_stack *stack)
+{
+	int		highest;
+	int		index;
+	int		i;
+
+	highest = MIN_NUMBER;
+	index = 0;
+	i = 0;
+	while (stack)
+	{
+		if (stack->value > highest)
+		{
+			highest = stack->value;
+			index = i;
+		}
+		i++;
+		stack = stack->next;
+	}
+	return (index);
+}

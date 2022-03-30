@@ -50,6 +50,13 @@ void	rrr(t_stack **a, t_stack **b, char **solution)
 	*solution = ft_strjoin(*solution, "rrr\n");
 }
 
+void	rr(t_stack **a, t_stack **b, char **solution)
+{
+	exec_rot(a);
+	exec_rot(b);
+	*solution = ft_strjoin(*solution, "rr\n");
+}
+
 void	pa(t_stack **a, t_stack **b, char **solution)
 {
 	exec_push(b, a);
