@@ -155,13 +155,13 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 	return (solution);
 }
 
-char	*sort_stack(t_stack **a, int stack_size)
+char	*sort_stack(t_stack **a, int stack_size, int sub_stack_size)
 {
 	t_stack	*b;
 
 	b = 0;
 	if (stack_size > 5)
-		return (solve_6_to_100(a, &b, stack_size));
+		return (solve_6_to_100(a, &b, stack_size, sub_stack_size));
 	if (stack_size <= 5)
 		return (solve_5(a, &b, stack_size));
 	return (NULL);

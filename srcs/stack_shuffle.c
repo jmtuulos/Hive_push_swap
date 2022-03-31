@@ -5,7 +5,7 @@ void	exec_rot(t_stack **stack)
 	t_stack	*curr;
 	t_stack	*tmp;
 
-	if ((*stack)->next == NULL)
+	if (!(*stack) || (*stack)->next == NULL)
 		return ;
 	curr = *stack;
 	tmp = (*stack)->next;
@@ -21,7 +21,7 @@ void	exec_rrot(t_stack **stack)
 	t_stack	*curr;
 	t_stack	*prev;
 
-	if ((*stack)->next == NULL)
+	if (!(*stack) || (*stack)->next == NULL)
 		return ;
 	curr = *stack;
 	while (curr->next)

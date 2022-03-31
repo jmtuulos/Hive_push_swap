@@ -17,6 +17,7 @@ void	error()
 int	chk_duplicates(int size, char **argv)
 {
 	int	i;
+	size -= 1;
 	while (size > 0)
 	{
 		i = size - 1;
@@ -35,6 +36,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 	long int	number;
 	int			i;
 
+	size -= 1;
 	while (size >= 0)
 	{
 		i = 0;

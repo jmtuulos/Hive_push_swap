@@ -10,11 +10,9 @@ void	wrong_answer()
 void	stack_sorted(t_stack *a, t_stack *b)
 {
 	int	nb;
+
 	if (b)
-	{
-		if (!(b->value == (char)0))
-			wrong_answer();
-	}
+		wrong_answer();
 	while(a->next)
 	{
 		nb = a->value;
@@ -93,16 +91,17 @@ int	main(int argc, char **argv)
 	b = 0;
 	if (argc < 2)
 		return (0);
+	input = &argv[1];
 	if (argc == 2)
 	{
 		input = ft_strsplit(argv[1], ' ');
 		argc = count_cells(input);
-		validate_input(&a, argc - 1, input);
+		validate_input(&a, argc, input);
 	}
 	else
-		validate_input(&a, argc - 2, &argv[1]);
+		validate_input(&a, argc - 2, input);
 	while (get_next_line(0, &line) > 0)
 		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
-	stack_sorted(a,b); // checking if a is sorted and b is empty
+	stack_sorted(a, b); // checking if a is sorted and b is empty
 	return (0);
 }

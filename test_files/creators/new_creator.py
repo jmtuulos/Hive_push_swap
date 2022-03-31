@@ -4,8 +4,8 @@ import numpy as np
 
 def main():
 
-    outfile = open("100_randoms", 'w')
-    lst = random.sample(range (0, 100), 100)
+    outfile = open("500_randoms", 'w')
+    lst = random.sample(range (-250, 250), 500)
     string = " ".join(map(str, lst))
     outfile.write(string)
     outfile.close()

@@ -54,20 +54,6 @@ char	*push_from_bottom_b(t_stack **b, t_stack **a, int index, int stack_size)
 	return (ret);
 }
 
-int	find_smallest(t_stack *stack)
-{
-	int	smallest;
-
-	smallest = stack->value;
-	while (stack->next)
-	{
-		if (smallest > stack->next->value)
-			smallest = stack->next->value;
-		stack = stack->next;
-	}
-	return (smallest);
-}
-
 int	max_of_stack(t_stack *a, int stack_size)
 {
 	t_stack	*tmp;
@@ -75,7 +61,7 @@ int	max_of_stack(t_stack *a, int stack_size)
 	int		reference;
 
 	tmp = a;
-	reference = find_smallest(a) - 1; // Could cause problems if smallest is negative?
+	reference = find_smallest_value(a) - 1; // Could cause problems if smallest is negative?
 	while (stack_size--)
 	{
 		max_of_stack = MAX_NUMBER;
@@ -95,16 +81,22 @@ int	choose_index(t_stack *stack, int *indices)
 {
 	int	stack_size;
 
-	stack_size = calc_stack_size(stack);
-	if (indices[0] < stack_size - indices[1])
+	if (indices[1] == -1)
 		return (indices[0]);
-	else
-		return (indices[1]);
+	stack_size = calc_stack_size(stack);
+	if (indices[0] > stack_size / 2)
+		indices[0] = stack_size - indices[0];
+	else if (indices[1] > stack_size / 2)
+		indices[1] = stack_size - indices[1];
+	if (indices[1] < indices[0])
+		return(indices[1]);
+	return (indices[0]);
 }
 
-int	*find_ends_in_range(t_stack *stack, int *top_bottom, int max_of_range)
+int	find_ends_in_range(t_stack *stack, int max_of_range)
 {
 	t_stack	*tmp;
+	int		*top_bottom;
 	int		i;
 
 	i = 0;
@@ -122,6 +114,7 @@ int	*find_ends_in_range(t_stack *stack, int *top_bottom, int max_of_range)
 		tmp = tmp->next;
 		i++;
 	}
+	top_bottom[1] = -1; //-------------------- To prevent it being 0 when not matches is found
 	while (tmp)
 	{
 		if (tmp->value <= max_of_range)
@@ -129,19 +122,19 @@ int	*find_ends_in_range(t_stack *stack, int *top_bottom, int max_of_range)
 		tmp = tmp->next;
 		i++;
 	}
-	return (top_bottom);
+	i = choose_index(stack, top_bottom);
+	free (top_bottom);
+	return (i);
 }
 
-int	*choice_rr_rrr(t_stack *a, t_stack *b, int *indices)
+int	*choice_rr_rrr(t_stack *a, t_stack *b, int i_a)
 {
-	int	i_a;
 	int	i_b;
 	int	*rr_rrr;
 
 	rr_rrr = (int *)malloc(sizeof(int) * 2);
 	rr_rrr[0] = 0;
 	rr_rrr[1] = 0;
-	i_a = choose_index(a, indices);
 	i_b = location_in_reverse_sorted(b, value_in_index(a, i_a));
 	if (i_b > calc_stack_size(b) / 2 && i_a > calc_stack_size(a) / 2)
 	{
@@ -170,16 +163,14 @@ int	nb_of_rotations(t_stack *a, t_stack *b, int rot_a, int rot_b)
 
 }
 
-void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int *indices)
+void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
 {
 	int	*rr_rrr;
-	int	rot_a;
 	int	rot_b;
 	int	ra_rra;
 	int	index;
 
-	rr_rrr = choice_rr_rrr(*a, *b, indices); 	// amount of moves combined
-	rot_a = choose_index(*a, indices); 			// The index that needs to be on top
+	rr_rrr = choice_rr_rrr(*a, *b, rot_a);
 	rot_b = location_in_reverse_sorted(*b, value_in_index(*a, rot_a));
 	ra_rra = 0;
 	if (rot_a > calc_stack_size(*a) / 2)
@@ -209,16 +200,22 @@ void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int *indices
 			rra(a, solution);
 		rot_a--;
 	}
+	free (rr_rrr);
 }
 
-void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution, int *top_bottom)
+void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution, int closest_index)
 {
 	int	dest_index;
 	int	stack_size;
 
-	rotate_index_to_top(a, b, solution, top_bottom);
+	rotate_index_to_top(a, b, solution, closest_index);
 	stack_size = calc_stack_size(*b);
-	dest_index = location_in_reverse_sorted(*b, (*a)->value); // needs to work without the stack being in order
+	if (find_highest_value(*b) < (*a)->value)
+		dest_index = find_highest(*b);
+	else if (find_smallest_value(*b) > (*a)->value)
+		dest_index = find_smallest(*b);
+	else
+		dest_index = location_in_reverse_sorted(*b, (*a)->value);
 	if (stack_size / 2 >= dest_index)
 		*solution = ft_strjoin(*solution, push_from_top_b(b, a, dest_index));
 	else
@@ -228,16 +225,16 @@ void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution, int *top_
 
 void	move_next_in_range(t_stack **a, t_stack **b, char **solution, int max_of_range)
 {
-	int	*top_bottom;
+	int	closest_index;
 	int	index;
 	int	stack_size;
 
 	stack_size = calc_stack_size(*a);
-	top_bottom = find_ends_in_range(*a, top_bottom, max_of_range);
-	push_to_reverse_sorted(b, a, solution, top_bottom);
+	closest_index = find_ends_in_range(*a, max_of_range);
+	push_to_reverse_sorted(b, a, solution, closest_index);
 }
 
-char	*solve_6_to_100(t_stack **a, t_stack **b, int stack_size)
+char	*solve_6_to_100(t_stack **a, t_stack **b, int stack_size, int sub_stack_size)
 {
 	int		max_of_range;
 	char	*solution;
@@ -249,16 +246,25 @@ char	*solve_6_to_100(t_stack **a, t_stack **b, int stack_size)
 		return (solution);
 	while (*a)
 	{
-		if (STACK_SZ_6_TO_100 <= calc_stack_size(*a))
-			range_size = STACK_SZ_6_TO_100;
+		if (sub_stack_size <= calc_stack_size(*a))
+			range_size = sub_stack_size;
 		else
 			range_size = calc_stack_size(*a);
 		max_of_range = max_of_stack(*a, range_size);
 		while (range_size--)
 			move_next_in_range(a, b, &solution, max_of_range);
 	}
+	int i; //test
+	int count;//test
 	while (*b)
 	{
+		i = 0;
+		count = 0;
+		while (solution[i])
+		{
+			if (solution[i++] == '\n')
+				count++;
+		}
 		rotate_highest_to_top_b(b, &solution);
 		pa(a,b, &solution);
 	}
