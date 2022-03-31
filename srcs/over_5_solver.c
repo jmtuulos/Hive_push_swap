@@ -80,15 +80,19 @@ int	max_of_stack(t_stack *a, int stack_size)
 int	choose_index(t_stack *stack, int *indices)
 {
 	int	stack_size;
+	int	first;
+	int	last;
 
 	if (indices[1] == -1)
 		return (indices[0]);
 	stack_size = calc_stack_size(stack);
+	first = indices[0];
+	last = indices[1];
 	if (indices[0] > stack_size / 2)
-		indices[0] = stack_size - indices[0];
+		first = stack_size - indices[0];
 	else if (indices[1] > stack_size / 2)
-		indices[1] = stack_size - indices[1];
-	if (indices[1] < indices[0])
+		last = stack_size - indices[1];
+	if (last < first)
 		return(indices[1]);
 	return (indices[0]);
 }
@@ -155,12 +159,11 @@ int	*choice_rr_rrr(t_stack *a, t_stack *b, int i_a)
 
 int	nb_of_rotations(t_stack *a, t_stack *b, int rot_a, int rot_b)
 {
-	if (rot_a > calc_stack_size(a) - rot_a)
-		rot_a = calc_stack_size(a) - rot_a;
-	if (rot_b > calc_stack_size(b) - rot_b)
-		rot_b = calc_stack_size(b) - rot_b;
+	if (rot_a > calc_stack_size(a) / 2)
+		rot_a = calc_stack_size(a) / 2;
+	if (rot_b > calc_stack_size(b) / 2)
+		rot_b = calc_stack_size(b) / 2;
 	return (rot_a + rot_b);
-
 }
 
 void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
@@ -189,7 +192,6 @@ void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
 			if (rr_rrr[1]-- > 0)
 				rrr(a, b, solution);
 			rot_a--;
-			rot_b--;
 		}
 	}
 	while (rot_a > 0)
