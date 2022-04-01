@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 		validate_input(&a, argc - 2, input);
 	moves = compare_solutions(&a, input);
 	if (!is_stack_sorted(a))
-		ft_putstr("Before printing, stack is not sorted. TEST");
+		ft_putstr("Before printing, stack is not sorted. DEBUG");
 	if (moves)
 		ft_putstr(moves);
 	return (0);

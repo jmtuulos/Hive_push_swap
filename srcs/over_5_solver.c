@@ -19,7 +19,6 @@ void	rotate_highest_to_top_b(t_stack **stack, char **solution)
 		while (highest--)
 			rrb(stack, solution);
 	}
-
 }
 
 char	*push_from_top_b(t_stack **b, t_stack **a, int index)
@@ -134,64 +133,58 @@ int	find_ends_in_range(t_stack *stack, int max_of_range)
 int	*choice_rr_rrr(t_stack *a, t_stack *b, int i_a)
 {
 	int	i_b;
+	int	to_top;
+	int	to_bottom;
+	int	lowest;
 	int	*rr_rrr;
 
 	rr_rrr = (int *)malloc(sizeof(int) * 2);
 	rr_rrr[0] = 0;
 	rr_rrr[1] = 0;
 	i_b = location_in_reverse_sorted(b, value_in_index(a, i_a));
-	if (i_b > calc_stack_size(b) / 2 && i_a > calc_stack_size(a) / 2)
-	{
-		if (i_b > i_a)
-			rr_rrr[1] = calc_stack_size(b) - i_b;
-		else
-			rr_rrr[1] = calc_stack_size(a) - i_a;
-	}
-	else if (i_b < calc_stack_size(b) / 2 && i_a < calc_stack_size(a) / 2)
-	{
-		if (i_b < i_a)
-			rr_rrr[0] = i_b;
-		else
-			rr_rrr[0] = i_a;
-	}
+	// calculate how many rotations to top and how many rotations to bottom, take the highest
+	to_top = i_a;
+	to_bottom = calc_stack_size(a) - i_a;
+	if (i_b > to_top)
+		to_top = i_b;
+	if (to_bottom < calc_stack_size(b) - i_b)
+		to_bottom = calc_stack_size(b) - i_b;
+	rr_rrr[1] = to_bottom;
+	rr_rrr[0] = to_top;
 	return (rr_rrr);
 }
 
-int	nb_of_rotations(t_stack *a, t_stack *b, int rot_a, int rot_b)
+int	get_rotation_from_index(t_stack *stack, int index)
 {
-	if (rot_a > calc_stack_size(a) / 2)
-		rot_a = calc_stack_size(a) / 2;
-	if (rot_b > calc_stack_size(b) / 2)
-		rot_b = calc_stack_size(b) / 2;
-	return (rot_a + rot_b);
+	if (index > calc_stack_size(stack) / 2)
+		return (calc_stack_size(stack) - index);
+	return (index);
 }
 
 void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
 {
 	int	*rr_rrr;
+	int	rotations;
 	int	rot_b;
 	int	ra_rra;
 	int	index;
 
 	rr_rrr = choice_rr_rrr(*a, *b, rot_a);
 	rot_b = location_in_reverse_sorted(*b, value_in_index(*a, rot_a));
-	ra_rra = 0;
-	if (rot_a > calc_stack_size(*a) / 2)
+	ra_rra = rot_a > calc_stack_size(*a) / 2;
+	rot_a = get_rotation_from_index(*a, rot_a);
+	rot_b = get_rotation_from_index(*b, rot_b);
+	if (rot_a + rot_b > rr_rrr[0] || rot_a + rot_b > rr_rrr[1])
 	{
-		rot_a = calc_stack_size(*a) - rot_a;
-		ra_rra = 1;
-	}
-	if (rot_b > calc_stack_size(*b) / 2)
-		rot_b = calc_stack_size(*b) - rot_b;
-	if ((rot_a + rot_b > rr_rrr[0] && rr_rrr[0] > 0) || (rr_rrr[1] > 0 && rot_a + rot_b > rr_rrr[1]))
-	{
-		while (rr_rrr[0] > 0 || rr_rrr[1] > 0)
+		ra_rra = rr_rrr[0] >= rr_rrr[1];
+		while (rot_b > 0 && rot_a > 0)
 		{
-			if (rr_rrr[0]-- > 0)
+			if (!ra_rra)
 				rr(a, b, solution);
-			if (rr_rrr[1]-- > 0)
+			if (ra_rra)
 				rrr(a, b, solution);
 			rot_a--;
+			rot_b--;
 		}
 	}
 	while (rot_a > 0)
@@ -258,15 +251,16 @@ char	*solve_6_to_100(t_stack **a, t_stack **b, int stack_size, int sub_stack_siz
 	}
 	int i; //test
 	int count;//test
+	printf("stuck after here?");
 	while (*b)
 	{
-		i = 0;
-		count = 0;
-		while (solution[i])
-		{
-			if (solution[i++] == '\n')
-				count++;
-		}
+		// i = 0;
+		// count = 0;
+		// while (solution[i])
+		// {
+		// 	if (solution[i++] == '\n')
+		// 		count++;
+		// }
 		rotate_highest_to_top_b(b, &solution);
 		pa(a,b, &solution);
 	}
