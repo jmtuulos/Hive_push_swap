@@ -19,7 +19,6 @@ void	rotate_highest_to_top_b(t_stack **stack, char **solution)
 		while (highest--)
 			rrb(stack, solution);
 	}
-
 }
 
 char	*push_from_top_b(t_stack **b, t_stack **a, int index)
@@ -77,18 +76,41 @@ int	max_of_stack(t_stack *a, int stack_size)
 	return (max_of_stack);
 }
 
+// OLD VERSION
+// int	choose_index(t_stack *stack, int *indices)
+// {
+// 	int	stack_size;
+
+// 	if (indices[1] == -1)
+// 		return (indices[0]);
+// 	stack_size = calc_stack_size(stack);
+// 	if (indices[0] > stack_size / 2)
+// 		indices[0] = stack_size - indices[0];
+// 	else if (indices[1] > stack_size / 2)
+// 		indices[1] = stack_size - indices[1];
+// 	if (indices[1] < indices[0])
+// 		return(indices[1]);
+// 	return (indices[0]);
+// }
+
+
+// FIXED VERSION:
 int	choose_index(t_stack *stack, int *indices)
 {
 	int	stack_size;
+	int	tmp_0;
+	int	tmp_1;
 
+	tmp_0 = indices[0];
+	tmp_1 = indices[1];
 	if (indices[1] == -1)
 		return (indices[0]);
 	stack_size = calc_stack_size(stack);
 	if (indices[0] > stack_size / 2)
-		indices[0] = stack_size - indices[0];
+		tmp_0 = stack_size - indices[0];
 	else if (indices[1] > stack_size / 2)
-		indices[1] = stack_size - indices[1];
-	if (indices[1] < indices[0])
+		tmp_1 = stack_size - indices[1];
+	if (tmp_1 < tmp_0)
 		return(indices[1]);
 	return (indices[0]);
 }
@@ -160,7 +182,6 @@ int	nb_of_rotations(t_stack *a, t_stack *b, int rot_a, int rot_b)
 	if (rot_b > calc_stack_size(b) - rot_b)
 		rot_b = calc_stack_size(b) - rot_b;
 	return (rot_a + rot_b);
-
 }
 
 void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
@@ -189,7 +210,6 @@ void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
 			if (rr_rrr[1]-- > 0)
 				rrr(a, b, solution);
 			rot_a--;
-			rot_b--;
 		}
 	}
 	while (rot_a > 0)

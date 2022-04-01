@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/03/31 19:56:06 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:47:22 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define MAX_NUMBER 2147483647
 # define MIN_NUMBER -2147483648
 # define STACK_SZ_6_TO_100 16
-# define STACK_SZ_OVER_100 44
-# define TRY_SOLUTIONS 1
+# define STACK_SZ_OVER_100 50
+# define TRY_SOLUTIONS 10
 
 //with string : "29 21 92 91 67 54 30 99 53 89 60 40 63 79 15 13 24 96 41 84 75 82 43 17 7 31 93 52 14 59 70 11 33 37 10 87 97 56 88 62 16 57 25 3 66 42 80 9 74 95 19 39 23 49 69 71 1 27 35 61 90 76 18 8 78 51 48 46 45 83 20 6 58 47 81 2 73 5 85 72 65 12 68 26 64 50 94 44 77 28 55 32 34 98 0 36 86 4 22 38"
 //For 100: 12 resulted in 700 moves
