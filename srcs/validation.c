@@ -17,11 +17,11 @@ void	error()
 int	chk_duplicates(int size, char **argv)
 {
 	int	i;
-	size -= 1;
+	size--;
 	while (size > 0)
 	{
 		i = size - 1;
-		while (i != 0)
+		while (i >= 0)
 		{
 			if (!ft_strcmp(argv[size], argv[i--]))
 				return (0);
@@ -40,9 +40,9 @@ int	create_stack(t_stack **a, int size, char **argv)
 	while (size >= 0)
 	{
 		i = 0;
-		if (argv[size][i] == '-')
+		if (argv[size][i] == '-' || argv[size][i] == '+')
 			i++;
-		if (argv[size][i] == '\0') // check against "-" string
+		if (argv[size][i] == '\0')
 			return(0);
 		while (argv[size][i] != '\0')
 		{

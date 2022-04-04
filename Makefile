@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/03/29 10:54:10 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/04/04 12:10:18 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_CHK =	checker.c\
 			validation.c\
 			stack_manipulation.c\
 			stack_shuffle.c\
-			get_next_line.c
+			get_next_line_mod.c
 
 SRCS_SWP =	solve_stack.c\
 			over_5_solver.c\

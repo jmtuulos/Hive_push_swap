@@ -88,6 +88,8 @@ int	main(int argc, char **argv)
 	}
 	else
 		validate_input(&a, argc - 1, input);
+	if (!*input)
+		error();
 	moves = compare_solutions(&a, input);
 	if (moves)
 		ft_putstr(moves);

@@ -1,11 +1,4 @@
 #include "pushswap.h"
-#include <stdio.h>
-
-void	wrong_answer()
-{
-	write(1, "KO\n", 3);
-	exit(0);
-}
 
 void	stack_sorted(t_stack *a, t_stack *b)
 {
@@ -83,10 +76,12 @@ void	stack_shuffle(t_stack **a, t_stack **b, char *command)
 int	main(int argc, char **argv)
 {
 	char	*line;
+	int		cmd;
 	t_stack	*a;
 	t_stack	*b;
 	char	**input;
 
+	cmd = 0;
 	input = argv;
 	b = 0;
 	if (argc < 2)
@@ -100,6 +95,9 @@ int	main(int argc, char **argv)
 	}
 	else
 		validate_input(&a, argc - 1, input);
+	// if (get_next_line(0, &line) <= 0)
+	// 	exit(0);
+	// stack_shuffle(&a, &b, line);
 	while (get_next_line(0, &line) > 0)
 		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
 	stack_sorted(a, b); // checking if a is sorted and b is empty
