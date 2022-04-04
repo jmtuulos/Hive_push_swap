@@ -145,7 +145,8 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 	else if (!is_stack_sorted(*a))
 	{
 		//not push pb for stack size 4?
-		pb(a, b, &solution);
+		if (stack_size == 5)
+			pb(a, b, &solution);
 		pb(a, b, &solution);
 		if (!is_stack_sorted(*a))
 			solution = ft_strjoin(solution, solve_stack_3(a));

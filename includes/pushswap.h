@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/01 19:47:22 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:01:56 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define MAX_NUMBER 2147483647
 # define MIN_NUMBER -2147483648
-# define STACK_SZ_6_TO_100 16
+# define STACK_SZ_6_TO_100 20
 # define STACK_SZ_OVER_100 50
 # define TRY_SOLUTIONS 10
 

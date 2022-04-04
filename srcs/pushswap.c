@@ -56,7 +56,9 @@ char	*compare_solutions(t_stack **a, char **input)
 	if (calc_stack_size(*a) > 100)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
-	try_arr = (char **)malloc(tries + 1);
+	try_arr = (char **)malloc(tries);
+	if (size <= 5)
+		return (sort_stack(a, size, 0));
 	i = 0;
 	while (tries--)
 	{
@@ -82,13 +84,11 @@ int	main(int argc, char **argv)
 	{
 		input = ft_strsplit(argv[1], ' ');
 		argc = count_cells(input);
-		validate_input(&a, argc - 1, input);
+		validate_input(&a, argc, input);
 	}
 	else
-		validate_input(&a, argc - 2, input);
+		validate_input(&a, argc - 1, input);
 	moves = compare_solutions(&a, input);
-	if (!is_stack_sorted(a))
-		ft_putstr("Before printing, stack is not sorted. TEST");
 	if (moves)
 		ft_putstr(moves);
 	return (0);

@@ -203,7 +203,7 @@ void	rotate_index_to_top(t_stack **a, t_stack **b, char **solution, int rot_a)
 		rot_b = calc_stack_size(*b) - rot_b;
 	if ((rot_a + rot_b > rr_rrr[0] && rr_rrr[0] > 0) || (rr_rrr[1] > 0 && rot_a + rot_b > rr_rrr[1]))
 	{
-		while (rr_rrr[0] > 0 || rr_rrr[1] > 0)
+		while (rr_rrr[0] > 0)
 		{
 			if (rr_rrr[0]-- > 0)
 				rr(a, b, solution);
@@ -240,7 +240,6 @@ void	push_to_reverse_sorted(t_stack **b, t_stack **a, char **solution, int close
 		*solution = ft_strjoin(*solution, push_from_top_b(b, a, dest_index));
 	else
 		*solution = ft_strjoin(*solution, push_from_bottom_b(b, a, dest_index, stack_size));
-	// rotate_highest_to_top_b(b, solution);
 }
 
 void	move_next_in_range(t_stack **a, t_stack **b, char **solution, int max_of_range)
