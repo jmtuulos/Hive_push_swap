@@ -1,5 +1,4 @@
 #include "pushswap.h"
-#include "stdio.h" //testing
 
 void	rotate_highest_to_top_b(t_stack **stack, char **solution)
 {
@@ -108,7 +107,7 @@ int	choose_index(t_stack *stack, int *indices)
 	stack_size = calc_stack_size(stack);
 	if (indices[0] > stack_size / 2)
 		tmp_0 = stack_size - indices[0];
-	else if (indices[1] > stack_size / 2)
+	if (indices[1] > stack_size / 2)
 		tmp_1 = stack_size - indices[1];
 	if (tmp_1 < tmp_0)
 		return(indices[1]);
