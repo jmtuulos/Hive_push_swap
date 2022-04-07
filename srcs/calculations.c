@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:09:21 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/07 16:59:45 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:13:43 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*solve_s3_helper(t_stack **stack)
 			return (ft_strdup("rra\nrra\n"));
 		}
 		exec_rot(stack);
-			return (ft_strdup("ra\n"));
+		return (ft_strdup("ra\n"));
 	}
 	exec_swap(stack);
 	return (ft_strdup("sa\n"));
