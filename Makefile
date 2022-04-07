@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/04/07 16:54:36 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/04/07 18:31:05 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,11 +69,13 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 clean:
 	@rm -f $(OBJ_CHK)
+	@make clean -C $(LIB_DIR) --silent
 	@rm -f $(OBJ_SWP)
 	@echo "Removed object files"
 
 fclean: clean
 	@rm -f $(NAME_CHK)
+	@make fclean -C $(LIB_DIR) --silent
 	@rm -f $(NAME_SWP)
 	@echo "Removed executables"
 
