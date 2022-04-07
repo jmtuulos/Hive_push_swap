@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_mod.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 22:36:26 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/03/23 18:33:36 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:50:49 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "pushswap.h"
 
 static char	*put_line(char **str)
 {
@@ -21,6 +22,8 @@ static char	*put_line(char **str)
 	lc_ptr = ft_strchr(tmp, '\n');
 	if (lc_ptr)
 		*lc_ptr = '\0';
+	else
+		error();
 	return (ft_strdup(tmp));
 }
 

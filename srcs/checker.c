@@ -1,11 +1,16 @@
-#include "pushswap.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 18:09:41 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/04/06 18:10:38 by jheiskan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	wrong_answer()
-{
-	write(1, "KO\n", 3);
-	exit(0);
-}
+#include "pushswap.h"
 
 void	stack_sorted(t_stack *a, t_stack *b)
 {
@@ -13,11 +18,11 @@ void	stack_sorted(t_stack *a, t_stack *b)
 
 	if (b)
 		wrong_answer();
-	while(a->next)
+	while (a->next)
 	{
 		nb = a->value;
 		a = a->next;
-		if(nb > a->value)
+		if (nb > a->value)
 		{
 			write(1, "KO\n", 3);
 			exit(0);
@@ -70,7 +75,7 @@ void	stack_shuffle(t_stack **a, t_stack **b, char *command)
 {
 	if (*command == 's')
 		chk_swap(a, b, command);
-	else if(*command == 'r')
+	else if (*command == 'r')
 		chk_rot(a, b, command);
 	else if (!ft_strcmp("pa", command))
 		exec_push(b, a);
@@ -83,10 +88,12 @@ void	stack_shuffle(t_stack **a, t_stack **b, char *command)
 int	main(int argc, char **argv)
 {
 	char	*line;
+	int		cmd;
 	t_stack	*a;
 	t_stack	*b;
 	char	**input;
 
+	cmd = 0;
 	input = argv;
 	b = 0;
 	if (argc < 2)
@@ -99,9 +106,9 @@ int	main(int argc, char **argv)
 		validate_input(&a, argc, input);
 	}
 	else
-		validate_input(&a, argc - 2, input);
+		validate_input(&a, argc - 1, input);
 	while (get_next_line(0, &line) > 0)
-		stack_shuffle(&a, &b, line); // validation should exit() and free stacks if fails
-	stack_sorted(a, b); // checking if a is sorted and b is empty
+		stack_shuffle(&a, &b, line);
+	stack_sorted(a, b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/03/29 10:54:10 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/04/07 16:54:36 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,14 @@ SRCS_CHK =	checker.c\
 			validation.c\
 			stack_manipulation.c\
 			stack_shuffle.c\
-			get_next_line.c
+			commands_ext.c\
+			positioning.c\
+			get_next_line_mod.c
 
 SRCS_SWP =	solve_stack.c\
+			push_to_stack.c\
+			solver_helper.c\
+			verifying_stack.c\
 			over_5_solver.c\
 			helper.c\
 			commands.c\
@@ -35,6 +40,7 @@ SRCS_SWP =	solve_stack.c\
 			stack_manipulation.c\
 			calculations.c\
 			stack_shuffle.c\
+			commands_ext.c\
 
 OBJ_NAME_CHK = $(SRCS_CHK:.c=.o)
 OBJ_NAME_SWP = $(SRCS_SWP:.c=.o)

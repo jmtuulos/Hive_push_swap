@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 18:22:10 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/04/06 18:22:32 by jheiskan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	exec_error(t_stack **a, t_stack **b)
@@ -7,21 +19,21 @@ void	exec_error(t_stack **a, t_stack **b)
 	error();
 }
 
-void	error()
+void	error(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
-
 int	chk_duplicates(int size, char **argv)
 {
 	int	i;
-	size -= 1;
+
+	size--;
 	while (size > 0)
 	{
 		i = size - 1;
-		while (i != 0)
+		while (i >= 0)
 		{
 			if (!ft_strcmp(argv[size], argv[i--]))
 				return (0);
@@ -40,10 +52,10 @@ int	create_stack(t_stack **a, int size, char **argv)
 	while (size >= 0)
 	{
 		i = 0;
-		if (argv[size][i] == '-')
+		if (argv[size][i] == '-' || argv[size][i] == '+')
 			i++;
-		if (argv[size][i] == '\0') // check against "-" string
-			return(0);
+		if (argv[size][i] == '\0')
+			return (0);
 		while (argv[size][i] != '\0')
 		{
 			if (!ft_isdigit(argv[size][i]) || i > 10)
