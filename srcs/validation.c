@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 18:22:10 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/04/06 18:22:32 by jheiskan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	exec_error(t_stack **a, t_stack **b)
@@ -7,16 +19,16 @@ void	exec_error(t_stack **a, t_stack **b)
 	error();
 }
 
-void	error()
+void	error(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
-
 int	chk_duplicates(int size, char **argv)
 {
 	int	i;
+
 	size--;
 	while (size > 0)
 	{
@@ -43,7 +55,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 		if (argv[size][i] == '-' || argv[size][i] == '+')
 			i++;
 		if (argv[size][i] == '\0')
-			return(0);
+			return (0);
 		while (argv[size][i] != '\0')
 		{
 			if (!ft_isdigit(argv[size][i]) || i > 10)

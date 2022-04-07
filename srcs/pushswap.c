@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pushswap.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/04/06 18:23:46 by jheiskan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 int	calc_stack_sz(t_stack *stack)
@@ -13,7 +25,7 @@ int	calc_stack_sz(t_stack *stack)
 	return (size);
 }
 
-char *best_solution(char **choices, int amount)
+char	*best_solution(char **choices, int amount)
 {
 	int	i;
 	int	count;
@@ -47,7 +59,6 @@ char	*compare_solutions(t_stack **a, char **input)
 	int		tries;
 	int		i;
 	int		size;
-	t_stack	*tmp;
 	char	**try_arr;
 	int		sub_stack_size;
 
@@ -95,6 +106,3 @@ int	main(int argc, char **argv)
 		ft_putstr(moves);
 	return (0);
 }
-
-
-

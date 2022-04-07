@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 16:18:01 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/06 21:50:04 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+int				find_smallest_value(t_stack *stack);
+int				find_ends_in_range(t_stack *stack, int max_of_range);
+char			*push_bottom_b(t_stack **b, t_stack **a, int index, int stack_size);
+char			*push_top_b(t_stack **b, t_stack **a, int index);
+int				index_in_r_sorted(t_stack *stack, int value);
+int				value_in_i(t_stack *stack, int index);
+void			rotate_highest_to_top_b(t_stack **stack, char **solution);
+int				index_in_r_sorted(t_stack *stack, int value);
+void			move_next_in_range(t_stack **a, t_stack **b, char **ret, int max_range);
+int				max_of_stack(t_stack *a, int stack_size);
+char			*solve_s3_helper(t_stack **stack);
+int				distance_to_edges(t_stack *stack, int index);
 void			wrong_answer();
 int				find_smallest(t_stack *stack);
 int				find_smallest_value(t_stack *stack);

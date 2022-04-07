@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_shuffle.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 18:22:44 by jheiskan          #+#    #+#             */
+/*   Updated: 2022/04/06 18:29:51 by jheiskan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	exec_rot(t_stack **stack)
@@ -57,3 +69,9 @@ void	exec_swap(t_stack **stack)
 	(*stack)->next->value = tmp;
 }
 
+void	rrr(t_stack **a, t_stack **b, char **solution)
+{
+	exec_rrot(a);
+	exec_rrot(b);
+	*solution = ft_strjoin(*solution, "rrr\n");
+}
