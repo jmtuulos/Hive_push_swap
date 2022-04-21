@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 20:57:46 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:24:12 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*sort_stack(t_stack **a, int stack_size, int sub_stack_size)
 	t_stack	*b;
 
 	b = 0;
+	if (stack_size == 1)
+		return (NULL);
 	if (stack_size > 5)
 		return (solve_over_6(a, &b, stack_size, sub_stack_size));
 	if (stack_size <= 5)
