@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 20:57:46 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:35:28 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ char	*solve_over_6(t_stack **a, t_stack **b, int stack_size, int sub_stack)
 		return (solution);
 	while (*a)
 	{
-		if (sub_stack <= calc_stack_size(*a))
+		if (sub_stack <= stack_size)
 			range_size = sub_stack;
 		else
-			range_size = calc_stack_size(*a);
+			range_size = stack_size;
 		max_of_range = max_of_stack(*a, range_size);
 		while (range_size--)
 			move_next_in_range(a, b, &solution, max_of_range);

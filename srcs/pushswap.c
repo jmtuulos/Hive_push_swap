@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 18:23:46 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:36:06 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	char	*moves;
 	char	**input;
-	int		sub_stack_size;
 
 	if (argc < 2)
 		return (0);

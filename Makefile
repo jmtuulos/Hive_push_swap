@@ -6,13 +6,13 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/04/07 18:31:05 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/04/22 15:34:22 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_CHK = checker
 NAME_SWP = push_swap
-FLAGS = -g
+FLAGS = -Wall -Wextra -Werror
 
 INCL = -Iincludes/ -I$(LIB_DIR)/includes
 
@@ -55,12 +55,12 @@ all: $(NAME_CHK) $(NAME_SWP)
 
 $(NAME_SWP): $(OBJ_SWP)
 	@make -C $(LIB_DIR) --silent
-	@gcc -o $(NAME_SWP) $(OBJ_SWP) -L $(LIB_DIR) -lft
+	@gcc $(FLAGS) -o $(NAME_SWP) $(OBJ_SWP) -L $(LIB_DIR) -lft
 	@echo "Compiled PushSwap"
 
 $(NAME_CHK): $(OBJ_CHK)
 	@make -C $(LIB_DIR) --silent
-	@gcc -o $(NAME_CHK) $(OBJ_CHK) -L $(LIB_DIR) -lft
+	@gcc $(FLAGS) -o $(NAME_CHK) $(OBJ_CHK) -L $(LIB_DIR) -lft
 	@echo "Compiled Checker"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

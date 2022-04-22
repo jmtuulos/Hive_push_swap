@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:30:09 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 22:07:56 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:35:53 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	push_to_r_sorted(t_stack **b, t_stack **a, char **solution, int index)
 void	move_next_in_range(t_stack **a, t_stack **b, char **ret, int max_range)
 {
 	int	closest_index;
-	int	index;
 	int	size;
 
 	size = calc_stack_size(*a);
