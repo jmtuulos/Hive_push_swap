@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:09:41 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 18:10:38 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:39:30 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,10 @@ void	stack_shuffle(t_stack **a, t_stack **b, char *command)
 int	main(int argc, char **argv)
 {
 	char	*line;
-	int		cmd;
 	t_stack	*a;
 	t_stack	*b;
 	char	**input;
 
-	cmd = 0;
 	input = argv;
 	b = 0;
 	if (argc < 2)

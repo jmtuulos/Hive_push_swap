@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:30:09 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/22 15:35:53 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:39:49 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	push_to_r_sorted(t_stack **b, t_stack **a, char **solution, int index)
 
 	rotate_index_to_top(a, b, solution, index);
 	size = calc_stack_size(*b);
-	dest_i = index_in_r_sorted(*b, (*a)->value);
+	if (!(*a))
+		dest_i = 0;
+	else
+		dest_i = index_in_r_sorted(*b, (*a)->value);
 	if (size / 2 >= dest_i)
 		*solution = ft_strjoin(*solution, push_top_b(b, a, dest_i));
 	else
@@ -93,9 +96,7 @@ void	push_to_r_sorted(t_stack **b, t_stack **a, char **solution, int index)
 void	move_next_in_range(t_stack **a, t_stack **b, char **ret, int max_range)
 {
 	int	closest_index;
-	int	size;
 
-	size = calc_stack_size(*a);
 	closest_index = find_ends_in_range(*a, max_range);
 	push_to_r_sorted(b, a, ret, closest_index);
 }
