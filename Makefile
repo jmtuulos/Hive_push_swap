@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2022/04/22 15:34:22 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/06/07 20:40:55 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,9 @@ OBJ_DIR = objs/
 LIB_DIR = libft/
 
 all: $(NAME_CHK) $(NAME_SWP)
+
+debug: FLAGS += -g
+debug: re
 
 $(NAME_SWP): $(OBJ_SWP)
 	@make -C $(LIB_DIR) --silent
