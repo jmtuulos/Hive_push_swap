@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/22 16:04:04 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:32:38 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 			pb(a, b, &solution);
 		pb(a, b, &solution);
 		if (!is_stack_sorted(*a))
-			solution = ft_strjoin(solution, solve_stack_3(a));
+			solution = ft_joindel(solution, solve_stack_3(a));
 		while (*b)
 			push_to_sorted(a, b, &solution);
 	}

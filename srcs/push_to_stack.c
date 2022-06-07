@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:17:17 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 18:26:01 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:32:47 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	push_to_sorted(t_stack **to, t_stack **from, char **solution)
 	size = calc_stack_size(*to);
 	index = location_in_sorted(*to, (*from)->value);
 	if (size / 2 >= index)
-		*solution = ft_strjoin(*solution, push_top(to, from, index));
+		*solution = ft_joindel(*solution, push_top(to, from, index));
 	else
-		*solution = ft_strjoin(*solution, push_bottom(to, from, index, size));
+		*solution = ft_joindel(*solution, push_bottom(to, from, index, size));
 }

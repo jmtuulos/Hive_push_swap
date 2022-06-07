@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:30:09 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/25 11:39:49 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:33:00 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void	push_to_r_sorted(t_stack **b, t_stack **a, char **solution, int index)
 	else
 		dest_i = index_in_r_sorted(*b, (*a)->value);
 	if (size / 2 >= dest_i)
-		*solution = ft_strjoin(*solution, push_top_b(b, a, dest_i));
+		*solution = ft_joindel(*solution, push_top_b(b, a, dest_i));
 	else
-		*solution = ft_strjoin(*solution, push_bottom_b(b, a, dest_i, size));
+		*solution = ft_joindel(*solution, push_bottom_b(b, a, dest_i, size));
 }
 
 void	move_next_in_range(t_stack **a, t_stack **b, char **ret, int max_range)

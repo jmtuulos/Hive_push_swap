@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:22:44 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 18:29:51 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/07 20:32:21 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void	rrr(t_stack **a, t_stack **b, char **solution)
 {
 	exec_rrot(a);
 	exec_rrot(b);
-	*solution = ft_strjoin(*solution, "rrr\n");
+	*solution = ft_joindel(*solution, "rrr\n");
 }
