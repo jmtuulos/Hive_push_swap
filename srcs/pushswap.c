@@ -6,23 +6,29 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 13:30:49 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:03:14 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	calc_stack_sz(t_stack *stack)
+char	*free_choices(char **choices, int best_index)
 {
-	int	size;
+	char	*ret;
+	char	**tmp1;
+	char	*tmp;
 
-	size = 0;
-	while (stack)
+	tmp1 = choices;
+	ret = ft_strdup(choices[best_index]);
+	if (!ret)
+		exit(-1);
+	while (*choices)
 	{
-		stack = stack->next;
-		size++;
+		tmp = *choices++;
+		free(tmp);
 	}
-	return (size);
+	free(tmp1);
+	return (ret);
 }
 
 char	*best_solution(char **choices, int amount)
@@ -39,10 +45,8 @@ char	*best_solution(char **choices, int amount)
 		count = 0;
 		i = 0;
 		while (choices[amount][i])
-		{
 			if (choices[amount][i++] == '\n')
 				count++;
-		}
 		if (best_count > count)
 		{
 			best_index = amount;
@@ -50,46 +54,55 @@ char	*best_solution(char **choices, int amount)
 		}
 		amount--;
 	}
-	return (choices[best_index]);
+	return (free_choices(choices, best_index));
 }
 
-char	*compare_solutions(t_stack **a, char **input)
+char	**allocate_array(void)
+{
+	char	**try_arr;
+
+	try_arr = (char **)malloc(sizeof(char **) * TRY_SOLUTIONS + 1);
+	if (!try_arr)
+		exit(-1);
+	try_arr[TRY_SOLUTIONS + 1] = NULL;
+	return (try_arr);
+}
+
+char	*compare_solutions(t_stack **a, char **input, int nb_of_inputs)
 {
 	int		tries;
-	int		i;
 	int		size;
 	char	**try_arr;
 	int		sub_stack_size;
 
-	size = count_cells(input);
+	size = calc_stack_size(*a);
 	sub_stack_size = STACK_SZ_6_TO_100;
-	if (calc_stack_size(*a) > 100)
+	if (size > 100)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
-	try_arr = (char **)malloc(sizeof(char **) * tries);
-	if (!try_arr)
-		exit(-1);
 	if (size <= 5)
 		return (sort_stack(a, size, 0));
-	i = 0;
+	try_arr = allocate_array();
 	while (tries--)
 	{
 		del_stack(*a);
 		*a = 0;
 		create_stack(a, size, input);
-		try_arr[i++] = sort_stack(a, calc_stack_size(*a), sub_stack_size--);
+		try_arr[tries] = sort_stack(a, calc_stack_size(*a), sub_stack_size--);
 	}
+	if (nb_of_inputs == 2)
+		free(free_choices(input, 0));
 	return (best_solution(try_arr, TRY_SOLUTIONS - 1));
 }
 
 int	main(int argc, char **argv)
 {
+	int		nb_of_inputs;
 	t_stack	*a;
 	char	*moves;
 	char	**input;
 
-	if (argc < 2)
-		return (0);
+	nb_of_inputs = argc;
 	input = &argv[1];
 	if (argc == 2)
 	{
@@ -101,8 +114,12 @@ int	main(int argc, char **argv)
 		validate_input(&a, argc - 1, input);
 	if (!*input)
 		error();
-	moves = compare_solutions(&a, input);
+	moves = compare_solutions(&a, input, nb_of_inputs);
+	if (nb_of_inputs == 2)
+		free(free_choices(input, 0));
+	del_stack(a);
 	if (moves)
 		ft_putstr(moves);
+	free(moves);
 	return (0);
 }

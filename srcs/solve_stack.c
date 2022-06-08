@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 10:43:47 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:43:32 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 {
 	char	*solution;
 
-	solution = ft_strnew(0);
-	if (!solution)
-		exit(-1);
 	if (stack_size == 3)
-		solution = solve_stack_3(a);
+		return (solve_stack_3(a));
 	else if (stack_size < 3)
-		solution = solve_stack_2(a);
+		return (solve_stack_2(a));
 	else if (!is_stack_sorted(*a))
 	{
+		solution = ft_strnew(0);
 		if (stack_size == 5)
 			pb(a, b, &solution);
 		pb(a, b, &solution);
@@ -57,8 +55,9 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 			solution = ft_joindel(solution, solve_stack_3(a));
 		while (*b)
 			push_to_sorted(a, b, &solution);
+		return (solution);
 	}
-	return (solution);
+	return (NULL);
 }
 
 char	*solve_over_6(t_stack **a, t_stack **b, int stack_size, int sub_stack)
