@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/07 17:39:37 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:44:49 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void			rrr(t_stack **a, t_stack **b, char **solution);
 void			pa(t_stack **a, t_stack **b, char **solution);
 void			pb(t_stack **a, t_stack **b, char **solution);
 int				location_in_sorted(t_stack *stack, int value);
+char			*join_n_del_first(char *s1, char *s2);
 
 #endif

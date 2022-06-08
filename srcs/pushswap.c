@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/07 17:27:38 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:44:58 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*best_solution(char **choices, int amount)
 	int	best_index;
 
 	best_index = 0;
-	amount--;
 	best_count = MAX_NUMBER;
 	while (amount >= 0)
 	{
@@ -67,7 +66,9 @@ char	*compare_solutions(t_stack **a, char **input)
 	if (calc_stack_size(*a) > 100)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
-	try_arr = (char **)malloc(tries);
+	try_arr = (char **)malloc(sizeof(char **) * tries);
+	if (!try_arr)
+		exit(-1);
 	if (size <= 5)
 		return (sort_stack(a, size, 0));
 	i = 0;
@@ -78,7 +79,7 @@ char	*compare_solutions(t_stack **a, char **input)
 		create_stack(a, size, input);
 		try_arr[i++] = sort_stack(a, calc_stack_size(*a), sub_stack_size--);
 	}
-	return (best_solution(try_arr, TRY_SOLUTIONS));
+	return (best_solution(try_arr, TRY_SOLUTIONS - 1));
 }
 
 int	main(int argc, char **argv)
@@ -86,7 +87,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	char	*moves;
 	char	**input;
-	int		sub_stack_size;
 
 	if (argc < 2)
 		return (0);

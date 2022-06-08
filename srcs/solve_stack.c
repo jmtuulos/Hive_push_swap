@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/21 15:24:12 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:42:48 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*solve_stack_3(t_stack **stack)
 {
 	if (is_stack_sorted(*stack))
-		return (NULL);
+		return (ft_strnew(0));
 	if ((*stack)->value > (*stack)->next->value)
 		return (solve_s3_helper(stack));
 	if ((*stack)->value < (*stack)->next->next->value)
@@ -42,6 +42,8 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 	char	*solution;
 
 	solution = ft_strnew(0);
+	if (!solution)
+		exit(-1);
 	if (stack_size == 3)
 		solution = solve_stack_3(a);
 	else if (stack_size < 3)
@@ -52,7 +54,7 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 			pb(a, b, &solution);
 		pb(a, b, &solution);
 		if (!is_stack_sorted(*a))
-			solution = ft_strjoin(solution, solve_stack_3(a));
+			solution = ft_joindel(solution, solve_stack_3(a));
 		while (*b)
 			push_to_sorted(a, b, &solution);
 	}
@@ -66,14 +68,16 @@ char	*solve_over_6(t_stack **a, t_stack **b, int stack_size, int sub_stack)
 	int		range_size;
 
 	solution = ft_strnew(0);
+	if (!solution)
+		exit(-1);
 	if (is_stack_sorted(*a))
 		return (solution);
 	while (*a)
 	{
-		if (sub_stack <= calc_stack_size(*a))
+		if (sub_stack <= stack_size)
 			range_size = sub_stack;
 		else
-			range_size = calc_stack_size(*a);
+			range_size = stack_size;
 		max_of_range = max_of_stack(*a, range_size);
 		while (range_size--)
 			move_next_in_range(a, b, &solution, max_of_range);

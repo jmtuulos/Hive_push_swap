@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:30:09 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/07 17:25:35 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:44:55 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	*choice_rr_rrr(t_stack *a, t_stack *b, int i_a)
 	int	*rr_rrr;
 
 	rr_rrr = (int *)malloc(sizeof(int) * 2);
+	if (!rr_rrr)
+		exit(-1);
 	rr_rrr[0] = 0;
 	rr_rrr[1] = 0;
 	i_b = index_in_r_sorted(b, value_in_i(a, i_a));
@@ -88,20 +90,22 @@ void	push_to_r_sorted(t_stack **b, t_stack **a, char **solution, int index)
 
 	rotate_index_to_top(a, b, solution, index);
 	size = calc_stack_size(*b);
-	dest_i = index_in_r_sorted(*b, (*a)->value);
-	if (size / 2 >= dest_i)
-		*solution = ft_strjoin(*solution, push_top_b(b, a, dest_i));
+	if (!(*a))
+		dest_i = 0;
 	else
-		*solution = ft_strjoin(*solution, push_bottom_b(b, a, dest_i, size));
+		dest_i = index_in_r_sorted(*b, (*a)->value);
+	if (size / 2 >= dest_i)
+		*solution = ft_joindel(*solution, push_top_b(b, a, dest_i));
+	else
+		*solution = ft_joindel(*solution, push_bottom_b(b, a, dest_i, size));
+	if (!solution)
+		exit(-1);
 }
 
 void	move_next_in_range(t_stack **a, t_stack **b, char **ret, int max_range)
 {
 	int	closest_index;
-	int	index;
-	int	size;
 
-	size = calc_stack_size(*a);
 	closest_index = find_ends_in_range(*a, max_range);
 	push_to_r_sorted(b, a, ret, closest_index);
 }

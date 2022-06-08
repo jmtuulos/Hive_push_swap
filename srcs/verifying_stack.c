@@ -6,11 +6,20 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:19:46 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 20:03:31 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:24:36 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+char	*join_n_del_first(char *s1, char *s2)
+{
+	char	*new;
+
+	new = ft_strjoin(s1, s2);
+	ft_strdel(&s1);
+	return (new);
+}
 
 int	is_stack_sorted(t_stack *stack)
 {
