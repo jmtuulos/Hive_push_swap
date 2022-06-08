@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:30:09 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 10:48:30 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:43:09 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int	*choice_rr_rrr(t_stack *a, t_stack *b, int i_a)
 {
 	int	i_b;
+	int	to_top;
+	int	to_bottom;
+	int	lowest;
 	int	*rr_rrr;
 
 	rr_rrr = (int *)malloc(sizeof(int) * 2);
@@ -55,6 +58,7 @@ void	rotate_a(t_stack **a, int rot, int ra_rra, char **ret)
 void	rotate_index_to_top(t_stack **a, t_stack **b, char **ret, int rot_a)
 {
 	int	*rr_rrr;
+	int	rotations;
 	int	rot_b;
 	int	ra_rra;
 
@@ -65,7 +69,8 @@ void	rotate_index_to_top(t_stack **a, t_stack **b, char **ret, int rot_a)
 	if ((rot_a + rot_b > rr_rrr[0] && rr_rrr[0] > 0) || \
 	(rr_rrr[1] > 0 && rot_a + rot_b > rr_rrr[1]))
 	{
-		while (rr_rrr[0] > 0 || rr_rrr[1] > 0)
+		ra_rra = rr_rrr[0] >= rr_rrr[1];
+		while (rot_b > 0 && rot_a > 0)
 		{
 			if (rr_rrr[0]-- > 0)
 				rr(a, b, ret);
