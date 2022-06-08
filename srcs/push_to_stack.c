@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:17:17 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/07 20:32:47 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 10:57:06 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*push_bottom(t_stack **a, t_stack **b, int index, int stack_size)
 
 	i = index;
 	ret = ft_strnew(0);
+	if (!ret)
+		exit(-1);
 	while (stack_size > i++)
 		rra(a, &ret);
 	pa(a, b, &ret);
@@ -34,6 +36,8 @@ char	*push_top(t_stack **a, t_stack **b, int index)
 	int		i;
 
 	ret = ft_strnew(0);
+	if (!ret)
+		exit(-1);
 	if (index == 0)
 	{
 		pa(a, b, &ret);

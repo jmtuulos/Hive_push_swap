@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:14:55 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/07 20:32:38 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 10:43:47 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*solve_stack_3(t_stack **stack)
 {
 	if (is_stack_sorted(*stack))
-		return (NULL);
+		return (ft_strnew(0));
 	if ((*stack)->value > (*stack)->next->value)
 		return (solve_s3_helper(stack));
 	if ((*stack)->value < (*stack)->next->next->value)
@@ -42,6 +42,8 @@ char	*solve_5(t_stack **a, t_stack **b, int stack_size)
 	char	*solution;
 
 	solution = ft_strnew(0);
+	if (!solution)
+		exit(-1);
 	if (stack_size == 3)
 		solution = solve_stack_3(a);
 	else if (stack_size < 3)
@@ -66,6 +68,8 @@ char	*solve_over_6(t_stack **a, t_stack **b, int stack_size, int sub_stack)
 	int		range_size;
 
 	solution = ft_strnew(0);
+	if (!solution)
+		exit(-1);
 	if (is_stack_sorted(*a))
 		return (solution);
 	while (*a)

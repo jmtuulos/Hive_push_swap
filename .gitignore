@@ -1,3 +1,4 @@
 .DS_Store
 .vscode/
-objs//log_error
+objs/
+log_error/

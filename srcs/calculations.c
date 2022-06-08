@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:09:21 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/07 17:13:43 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:25:42 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	*solve_s3_helper(t_stack **stack)
 	tmp = (*stack)->next;
 	if ((*stack)->value > tmp->next->value)
 	{
-		if ((*stack)->value > tmp->value)
+		if (tmp->value > tmp->next->value)
 		{
+			exec_swap(stack);
 			exec_rrot(stack);
-			exec_rrot(stack);
-			return (ft_strdup("rra\nrra\n"));
+			return (ft_strdup("sa\nrra\n"));
 		}
 		exec_rot(stack);
 		return (ft_strdup("ra\n"));

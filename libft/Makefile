@@ -6,7 +6,7 @@
 #    By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/27 09:59:08 by smarvin           #+#    #+#              #
-#    Updated: 2021/12/17 16:26:02 by jheiskan         ###   ########.fr        #
+#    Updated: 2022/06/07 20:56:12 by jheiskan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCL = ./includes/
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c -I $(INCL) $(SRCS)
+	gcc -g -Wall -Wextra -Werror -c -I $(INCL) $(SRCS)
 	ar rcs $(NAME) $(OBJ)
 
 clean:
