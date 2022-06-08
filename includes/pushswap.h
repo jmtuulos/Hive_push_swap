@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 11:29:21 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:19:12 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			del_stack(t_stack *stack);
 void			error(void);
 t_stack			*new_node(int value);
 long long int	ft_atoi_long(const char *str);
-void			validate_input(t_stack **a, int size, char **argv);
+void			validate_input(t_stack **a, int size, char **argv, int nb_of_inputs);
 void			add_to_start(t_stack **a, int value);
 int				get_next_line(const int fd, char **line);
 char			*sort_stack(t_stack **a, int stack_size, int sub_stack_size);

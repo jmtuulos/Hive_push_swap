@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 18:03:14 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:26:28 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ int	main(int argc, char **argv)
 	{
 		input = ft_strsplit(argv[1], ' ');
 		argc = count_cells(input);
-		validate_input(&a, argc, input);
+		validate_input(&a, argc, input, nb_of_inputs);
 	}
 	else
-		validate_input(&a, argc - 1, input);
+		validate_input(&a, argc - 1, input, nb_of_inputs);
 	if (!*input)
 		error();
 	moves = compare_solutions(&a, input, nb_of_inputs);

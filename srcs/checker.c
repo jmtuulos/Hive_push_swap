@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:09:41 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 10:52:00 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:24:50 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ int	main(int argc, char **argv)
 	{
 		input = ft_strsplit(argv[1], ' ');
 		argc = count_cells(input);
-		validate_input(&a, argc, input);
+		validate_input(&a, argc, input, 2);
 	}
 	else
-		validate_input(&a, argc - 1, input);
+		validate_input(&a, argc - 1, input, 2);
 	while (get_next_line(0, &line) > 0)
 		stack_shuffle(&a, &b, line);
 	stack_sorted(a, b);
