@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 18:26:28 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:31:38 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*compare_solutions(t_stack **a, char **input, int nb_of_inputs)
 	if (size > 100)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
+	if (size <= 5 && nb_of_inputs == 2)
+		free(free_choices(input, 0));
 	if (size <= 5)
 		return (sort_stack(a, size, 0));
 	try_arr = allocate_array();
@@ -104,19 +106,19 @@ int	main(int argc, char **argv)
 
 	nb_of_inputs = argc;
 	input = &argv[1];
+	if (argc == 1)
+		return (0);
 	if (argc == 2)
 	{
 		input = ft_strsplit(argv[1], ' ');
 		argc = count_cells(input);
-		validate_input(&a, argc, input, nb_of_inputs);
+		validate_input(&a, argc, input);
 	}
 	else
-		validate_input(&a, argc - 1, input, nb_of_inputs);
+		validate_input(&a, argc - 1, input);
 	if (!*input)
 		error();
 	moves = compare_solutions(&a, input, nb_of_inputs);
-	if (nb_of_inputs == 2)
-		free(free_choices(input, 0));
 	del_stack(a);
 	if (moves)
 		ft_putstr(moves);

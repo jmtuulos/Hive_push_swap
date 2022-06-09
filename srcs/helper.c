@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:13:04 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 21:52:54 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:33:19 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	count_cells(char **array)
 	int	i;
 
 	i = 0;
+	if (!array || !*array)
+		exit(-1);
 	while (array[i])
 		i++;
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:22:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/08 18:25:38 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:51:00 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,9 @@ int	create_stack(t_stack **a, int size, char **argv)
 	return (1);
 }
 
-void	validate_input(t_stack **a, int size, char **argv, int nb_of_inputs)
+void	validate_input(t_stack **a, int size, char **argv)
 {
 	*a = NULL;
-	if (nb_of_inputs < 2)
-		exit(1);
 	if (!create_stack(a, size, argv) || !chk_duplicates(size, argv))
 	{
 		del_stack(*a);
