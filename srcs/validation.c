@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:22:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/09 18:51:00 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:41:41 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	create_stack(t_stack **a, int size, char **argv)
 	long int	number;
 	int			i;
 
-	size -= 1;
+	//size -= 1;
 	while (size >= 0)
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:01:19 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/09 18:43:07 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:32:40 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+char			**allocate_starting_array(char **input, int size);
+char			*free_choices(char **choices, int best_index);
 int				find_smallest_value(t_stack *stack);
 int				find_ends_in_range(t_stack *stack, int max_of_range);
 char			*push_bottom_b(t_stack **b, t_stack **a, \
@@ -42,7 +44,7 @@ t_stack **b, char **ret, int max_range);
 int				max_of_stack(t_stack *a, int stack_size);
 char			*solve_s3_helper(t_stack **stack);
 int				distance_to_edges(t_stack *stack, int index);
-void			wrong_answer(void);
+void			wrong_answer(char **input);
 int				find_smallest(t_stack *stack);
 int				find_smallest_value(t_stack *stack);
 int				find_highest_value(t_stack *stack);

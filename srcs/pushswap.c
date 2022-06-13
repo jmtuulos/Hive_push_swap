@@ -6,30 +6,11 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/09 19:31:38 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:32:54 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-char	*free_choices(char **choices, int best_index)
-{
-	char	*ret;
-	char	**tmp1;
-	char	*tmp;
-
-	tmp1 = choices;
-	ret = ft_strdup(choices[best_index]);
-	if (!ret)
-		exit(-1);
-	while (*choices)
-	{
-		tmp = *choices++;
-		free(tmp);
-	}
-	free(tmp1);
-	return (ret);
-}
 
 char	*best_solution(char **choices, int amount)
 {
@@ -68,7 +49,7 @@ char	**allocate_array(void)
 	return (try_arr);
 }
 
-char	*compare_solutions(t_stack **a, char **input, int nb_of_inputs)
+char	*compare_solutions(t_stack **a, char **input)
 {
 	int		tries;
 	int		size;
@@ -80,7 +61,7 @@ char	*compare_solutions(t_stack **a, char **input, int nb_of_inputs)
 	if (size > 100)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
-	if (size <= 5 && nb_of_inputs == 2)
+	if (size <= 5)
 		free(free_choices(input, 0));
 	if (size <= 5)
 		return (sort_stack(a, size, 0));
@@ -92,33 +73,27 @@ char	*compare_solutions(t_stack **a, char **input, int nb_of_inputs)
 		create_stack(a, size, input);
 		try_arr[tries] = sort_stack(a, calc_stack_size(*a), sub_stack_size--);
 	}
-	if (nb_of_inputs == 2)
-		free(free_choices(input, 0));
+	free(free_choices(input, 0));
 	return (best_solution(try_arr, TRY_SOLUTIONS - 1));
 }
 
 int	main(int argc, char **argv)
 {
-	int		nb_of_inputs;
 	t_stack	*a;
 	char	*moves;
 	char	**input;
 
-	nb_of_inputs = argc;
-	input = &argv[1];
-	if (argc == 1)
+	if (argc < 2)
 		return (0);
 	if (argc == 2)
-	{
-		input = ft_strsplit(argv[1], ' ');
-		argc = count_cells(input);
-		validate_input(&a, argc, input);
-	}
+		input = ft_strsplit(ft_strdup(argv[1]), ' ');
 	else
-		validate_input(&a, argc - 1, input);
+		input = allocate_starting_array(argv, argc - 1);
+	argc = count_cells(input);
+	validate_input(&a, argc, input);
 	if (!*input)
 		error();
-	moves = compare_solutions(&a, input, nb_of_inputs);
+	moves = compare_solutions(&a, input);
 	del_stack(a);
 	if (moves)
 		ft_putstr(moves);

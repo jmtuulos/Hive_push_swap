@@ -6,14 +6,15 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:13:04 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/09 19:33:19 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:54:33 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	wrong_answer(void)
+void	wrong_answer(char **input)
 {
+	free (*input);
 	write(1, "KO\n", 3);
 	exit(0);
 }

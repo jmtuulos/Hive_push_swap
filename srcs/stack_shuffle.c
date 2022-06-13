@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:22:44 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/07 21:26:58 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:03:00 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	exec_swap(t_stack **stack)
 {
 	int		tmp;
 
-	if ((*stack)->next == NULL)
+	if (!(*stack) || (*stack)->next == NULL)
 		return ;
 	tmp = (*stack)->value;
 	(*stack)->value = (*stack)->next->value;
