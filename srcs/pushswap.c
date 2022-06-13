@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/13 16:32:54 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:42:42 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**allocate_array(void)
 {
 	char	**try_arr;
 
-	try_arr = (char **)malloc(sizeof(char **) * TRY_SOLUTIONS + 1);
+	try_arr = (char **)malloc(sizeof(char *) * TRY_SOLUTIONS + 1);
 	if (!try_arr)
 		exit(-1);
 	try_arr[TRY_SOLUTIONS + 1] = NULL;
@@ -62,9 +62,10 @@ char	*compare_solutions(t_stack **a, char **input)
 		sub_stack_size = STACK_SZ_OVER_100;
 	tries = TRY_SOLUTIONS;
 	if (size <= 5)
+	{
 		free(free_choices(input, 0));
-	if (size <= 5)
 		return (sort_stack(a, size, 0));
+	}
 	try_arr = allocate_array();
 	while (tries--)
 	{
@@ -86,7 +87,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	if (argc == 2)
-		input = ft_strsplit(ft_strdup(argv[1]), ' ');
+		input = ft_strsplit(argv[1], ' ');
 	else
 		input = allocate_starting_array(argv, argc - 1);
 	argc = count_cells(input);

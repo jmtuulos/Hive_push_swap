@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:21:48 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/04/06 18:29:43 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:45:34 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,23 @@ void	add_to_end(t_stack **a, int value)
 			tmp = tmp->next;
 		tmp->next = new_node(value);
 	}
+}
+
+char	*free_choices(char **choices, int best_index)
+{
+	char	*ret;
+	char	**tmp1;
+	char	*tmp;
+
+	tmp1 = choices;
+	ret = ft_strdup(choices[best_index]);
+	if (!ret)
+		exit(-1);
+	while (*choices)
+	{
+		tmp = *choices++;
+		free(tmp);
+	}
+	free(tmp1);
+	return (ret);
 }

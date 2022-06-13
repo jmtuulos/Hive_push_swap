@@ -6,48 +6,30 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:19:46 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/13 16:44:50 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:45:15 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-char	*free_choices(char **choices, int best_index)
-{
-	char	*ret;
-	char	**tmp1;
-	char	*tmp;
-
-	tmp1 = choices;
-	ret = ft_strdup(choices[best_index]);
-	if (!ret)
-		exit(-1);
-	while (*choices)
-	{
-		tmp = *choices++;
-		free(tmp);
-	}
-	free(tmp1);
-	return (ret);
-}
-
 char	**allocate_starting_array(char **input, int size)
 {
-	char **new;
-	//char **tmp;
-	
-	new = (char **)malloc(sizeof(char **));
-	//tmp = new;
+	char	**new;
+	char	**tmp;
+
+	new = (char **)malloc(sizeof(char *) * size + 1);
+	tmp = new;
 	if (!new)
 		exit(-1);
 	input++;
 	while (size-- > 0)
 	{
-		*new++ = ft_strdup(*input++);
-		if (!*new)
+		*new = ft_strdup(*input++);
+		if (!*new++)
 			exit(-1);
 	}
-	return (new);
+	*new = 0;
+	return (tmp);
 }
 
 char	*join_n_del_first(char *s1, char *s2)
