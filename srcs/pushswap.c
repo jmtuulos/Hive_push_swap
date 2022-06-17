@@ -6,7 +6,7 @@
 /*   By: jheiskan <jheiskan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:23:10 by jheiskan          #+#    #+#             */
-/*   Updated: 2022/06/13 20:42:42 by jheiskan         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:40:03 by jheiskan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ int	main(int argc, char **argv)
 		input = allocate_starting_array(argv, argc - 1);
 	argc = count_cells(input);
 	validate_input(&a, argc, input);
-	if (!*input)
-		error();
 	moves = compare_solutions(&a, input);
 	del_stack(a);
 	if (moves)
