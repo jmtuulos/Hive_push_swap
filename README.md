@@ -14,3 +14,7 @@ The below example is easy as there is only 5 different possibilities for a stack
 ![push_swap_exampl1](https://user-images.githubusercontent.com/43127337/186123843-5f1f6763-71c8-4417-ba80-a303b151fded.png)
 
 The more difficult part is to solve a stack of 100 or a stack of 500. With the limited move possibilities you would've to adjust your algorithm depending on how big the given stack is.
+
+## Usage
+```Make```
+```./push-swap 
