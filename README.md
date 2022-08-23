@@ -16,5 +16,16 @@ The below example is easy as there is only 5 different possibilities for a stack
 The more difficult part is to solve a stack of 100 or a stack of 500. With the limited move possibilities you would've to adjust your algorithm depending on how big the given stack is.
 
 ## Usage
-```Make```
-```./push-swap 
+
+```bash
+Make
+```
+
+```
+ARG=`python3 generator.py`; ./push_swap $ARG | ./checker $ARG
+```
+
+./checker outputs OK if the stack given from push_swap is actually sorted.
+
+./push_swap outputs the moves required to sort the given stack.
+
