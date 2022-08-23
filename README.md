@@ -8,6 +8,8 @@ Allowed moves to arrange the stack are:
 1. Push top of A and/or B to bottom
 2. Swap top two of stack A and/or B
 3. Push bottom of A and/or B to top
+4. Push top of A to top of B
+5. Push top of B to top of A
 
 The below example is easy as there is only 5 different possibilities for a stack of three to be arranged. You can solve these with a maximum of two moves.
 
